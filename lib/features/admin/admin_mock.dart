@@ -6,7 +6,7 @@ import 'package:skin_care_ai/core/env.dart';
 class AdminConfig {
   // TODO: Replace with your actual Gemini API Key from Google AI Studio
   // Using the known working key directly for now to ensure all services work
-  static const String geminiApiKey = 'AIzaSyDknbIMjbC3AhGmEBn51fOH4j1vLCqHNd0';
+  static final String geminiApiKey = Env.geminiApiKey;
 
   static const String aiSystemPrompt = """
 You are a top-tier dermatologist and skincare expert. 
