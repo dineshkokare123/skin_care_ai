@@ -1,0 +1,17 @@
+{
+    "provider": "apple_pay",
+    "data": {
+        "merchantIdentifier": "merchant.com.skincareai",
+        "displayName": "SkinCare AI",
+        "merchantCapabilities": [
+            "3DS"
+        ],
+        "supportedNetworks": [
+            "amex",
+            "visa",
+            "masterCard"
+        ],
+        "countryCode": "US",
+        "currencyCode": "USD"
+    }
+}
