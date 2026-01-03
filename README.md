@@ -11,6 +11,10 @@ A comprehensive AI-powered skincare companion app built with Flutter.
 * **Educational Blog**: AI-generated skincare articles.
 * **Seller Tools**: Sales analytics and product management.
 
+## App Walkthrough
+
+<img src="screenshots/app_walkthrough.gif" width="300" />
+
 ## Screenshots
 
 ### Onboarding & Authentication
