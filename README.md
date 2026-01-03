@@ -4,27 +4,37 @@ A comprehensive AI-powered skincare companion app built with Flutter.
 
 ## Features
 
-*   **AI Skin Analysis Quiz**: Determine skin type and concerns.
-*   **Personalized Routines**: AI-generated morning and evening routines.
-*   **AI Chat Consultant**: Ask questions to a virtual dermatologist.
-*   **Skin Store**: Curated products with simulated checkout.
-*   **Educational Blog**: AI-generated skincare articles.
-*   **Seller Tools**: Sales analytics and product management.
+* **AI Skin Analysis Quiz**: Determine skin type and concerns.
+* **Personalized Routines**: AI-generated morning and evening routines.
+* **AI Chat Consultant**: Ask questions to a virtual dermatologist.
+* **Skin Store**: Curated products with simulated checkout.
+* **Educational Blog**: AI-generated skincare articles.
+* **Seller Tools**: Sales analytics and product management.
 
 ## Screenshots
 
-| Sales Analytics | Profile & Premium |
-|:---:|:---:|
-| <img src="screenshots/sales_analytics.png" width="300" /> | <img src="screenshots/profile_premium.png" width="300" /> |
+### Onboarding & Authentication
 
-| Activity History | Blog Post | Order Success |
+| Splash Screen | Loading | Login | Sign Up |
+|:---:|:---:|:---:|:---:|
+| <img src="screenshots/splash_screen.png" width="200" /> | <img src="screenshots/loading_screen.png" width="200" /> | <img src="screenshots/login_screen.png" width="200" /> | <img src="screenshots/signup_screen.png" width="200" /> |
+
+### Core Experience
+
+| Home Dashboard | Blog Post | Order Success |
 |:---:|:---:|:---:|
-| <img src="screenshots/activity_history.png" width="300" /> | <img src="screenshots/blog_post.png" width="300" /> | <img src="screenshots/order_success.png" width="300" /> |
+| <img src="screenshots/home_screen.png" width="250" /> | <img src="screenshots/blog_post.png" width="250" /> | <img src="screenshots/order_success.png" width="250" /> |
+
+### Profile & Analytics
+
+| Sales Analytics | Profile & Premium | Activity History |
+|:---:|:---:|:---:|
+| <img src="screenshots/sales_analytics.png" width="250" /> | <img src="screenshots/profile_premium.png" width="250" /> | <img src="screenshots/activity_history.png" width="250" /> |
 
 ## Technologies
 
-*   **Flutter & Dart**
-*   **Google Gemini API** (AI Integration)
-*   **Riverpod** (State Management)
-*   **GoRouter** (Navigation)
-*   **FL Chart** (Analytics)
+* **Flutter & Dart**
+* **Google Gemini API** (AI Integration)
+* **Riverpod** (State Management)
+* **GoRouter** (Navigation)
+* **FL Chart** (Analytics)
