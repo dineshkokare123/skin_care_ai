@@ -1,44 +1,30 @@
 # SkinCare AI
 
-An AI-powered skincare application built with Flutter.
+A comprehensive AI-powered skincare companion app built with Flutter.
 
 ## Features
 
-- **Skin Quiz**: Determine skin type and concerns.
-- **AI Chat**: Powered by Google Gemini.
-- **Personalized Routine**: AM/PM steps based on analysis.
-- **Dynamic Content**: Blog posts and product recommendations.
+*   **AI Skin Analysis Quiz**: Determine skin type and concerns.
+*   **Personalized Routines**: AI-generated morning and evening routines.
+*   **AI Chat Consultant**: Ask questions to a virtual dermatologist.
+*   **Skin Store**: Curated products with simulated checkout.
+*   **Educational Blog**: AI-generated skincare articles.
+*   **Seller Tools**: Sales analytics and product management.
 
-## Setup
+## Screenshots
 
-1. **Install Dependencies**
+| Sales Analytics | Profile & Premium |
+|:---:|:---:|
+| <img src="screenshots/sales_analytics.png" width="300" /> | <img src="screenshots/profile_premium.png" width="300" /> |
 
-   ```bash
-   flutter pub get
-   ```
+| Activity History | Blog Post | Order Success |
+|:---:|:---:|:---:|
+| <img src="screenshots/activity_history.png" width="300" /> | <img src="screenshots/blog_post.png" width="300" /> | <img src="screenshots/order_success.png" width="300" /> |
 
-2. **Configure API Key**
-   Open `lib/features/chat/chat_screen.dart` and replace `YOUR_GEMINI_API_KEY` with your actual Google Gemini API key.
+## Technologies
 
-3. **Run the App**
-
-   ```bash
-   flutter run
-   ```
-
-## Architecture (MVP)
-
-The app uses a modular structure:
-
-- `lib/core`: Theme, Routing, Configuration.
-- `lib/features`: Distinct feature modules (Quiz, Chat, Home, Routine).
-- `lib/shared`: Reusable widgets.
-
-## Admin Panel (Configuration)
-
-Currently, content is managed in `lib/features/admin/admin_mock.dart` to simulated a remote backend.
-To enable "updates without redeploying", migrate the `AdminConfig` data structures to:
-
-1. **Firebase Remote Config** (for simple text/prompts).
-2. **Firestore** (for Blog Posts and Products).
-3. **Admin Dashboard**: Build a simple React/Flutter Web app that writes to Firestore.
+*   **Flutter & Dart**
+*   **Google Gemini API** (AI Integration)
+*   **Riverpod** (State Management)
+*   **GoRouter** (Navigation)
+*   **FL Chart** (Analytics)

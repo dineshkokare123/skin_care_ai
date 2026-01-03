@@ -81,63 +81,168 @@ You are aware of these products and can recommend them if they fit the user's sk
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("AI Skin Consultant")),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _history.length,
-              itemBuilder: (context, index) {
-                final content = _history[index];
-                final isUser = content.role == 'user';
-                return Align(
-                  alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    padding: const EdgeInsets.all(12),
-                    constraints: const BoxConstraints(maxWidth: 300),
-                    decoration: BoxDecoration(
-                      color: isUser ? AppTheme.primary : AppTheme.secondary,
-                      borderRadius: BorderRadius.circular(16).copyWith(
-                        bottomRight: isUser ? Radius.zero : null,
-                        bottomLeft: isUser ? null : Radius.zero,
-                      ),
-                    ),
-                    child: MarkdownBody(
-                      data: content.parts.whereType<TextPart>().map((e) => e.text).join(''),
-                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-                        p: TextStyle(color: isUser ? Colors.white : Colors.black87),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+      appBar: AppBar(
+        title: const Text("AI Skin Consultant"),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: AppTheme.textDark,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: const NetworkImage("https://www.transparenttextures.com/patterns/cubes.png"), // Subtle pattern or gradient
+            colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.05), BlendMode.dstATop),
+            fit: BoxFit.cover,
           ),
-          if (_isLoading) const LinearProgressIndicator(),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: "Ask about your skin...",
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(20),
+                itemCount: _history.length + (_isLoading ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index == _history.length) {
+                    return _buildTypingIndicator();
+                  }
+
+                  final content = _history[index];
+                  final isUser = content.role == 'user';
+                  final text = content.parts.whereType<TextPart>().map((e) => e.text).join('');
+                  
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (!isUser) _buildAvatar(false),
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: isUser ? AppTheme.primary : Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 5),
+                                )
+                              ],
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(20),
+                                topRight: const Radius.circular(20),
+                                bottomLeft: isUser ? const Radius.circular(20) : Radius.zero,
+                                bottomRight: isUser ? Radius.zero : const Radius.circular(20),
+                              ),
+                            ),
+                            child: MarkdownBody(
+                              data: text,
+                              styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                                p: TextStyle(color: isUser ? Colors.white : AppTheme.textDark, height: 1.5),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        if (isUser) _buildAvatar(true),
+                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                IconButton(
-                  onPressed: _sendMessage,
-                  icon: const Icon(Icons.send),
-                  color: AppTheme.primary,
-                )
-              ],
+                  );
+                },
+              ),
             ),
+            _buildInputArea(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAvatar(bool isUser) {
+    return CircleAvatar(
+      radius: 16,
+      backgroundColor: isUser ? AppTheme.accent : AppTheme.secondary,
+      child: Icon(
+        isUser ? Icons.person : Icons.auto_awesome,
+        size: 16,
+        color: isUser ? Colors.white : AppTheme.primary,
+      ),
+    );
+  }
+
+  Widget _buildTypingIndicator() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20, left: 40),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              width: 12,
+              height: 12,
+              child: CircularProgressIndicator(strokeWidth: 2, color: AppTheme.primary),
+            ),
+            const SizedBox(width: 8),
+            Text("AI is typing...", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputArea() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -5),
           )
         ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: TextField(
+                  controller: _controller,
+                  decoration: const InputDecoration(
+                    hintText: "Ask about routines, products...",
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              decoration: const BoxDecoration(
+                color: AppTheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                onPressed: _sendMessage,
+                icon: const Icon(Icons.send_rounded, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

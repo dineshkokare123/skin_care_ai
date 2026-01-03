@@ -85,4 +85,19 @@ class AppTheme {
       ),
     );
   }
+
+  static BoxDecoration glassDecoration({double opacity = 0.8, double blur = 10, Color color = Colors.white}) {
+    return BoxDecoration(
+      color: color.withOpacity(opacity),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: Colors.white.withOpacity(0.2)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.05),
+          blurRadius: 20,
+          offset: const Offset(0, 10),
+        ),
+      ],
+    );
+  }
 }

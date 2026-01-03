@@ -15,6 +15,7 @@ import '../features/admin/add_product_screen.dart';
 import '../features/shop/product_details_screen.dart';
 import '../features/shop/shop_screen.dart';
 import '../features/booking/booking_screen.dart';
+import '../features/profile/sales_analytics_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
@@ -109,6 +110,11 @@ final goRouter = GoRouter(
       parentNavigatorKey: _rootNavigatorKey,
       path: '/shop',
       builder: (context, state) => const ShopScreen(),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: '/analytics',
+      builder: (context, state) => const SalesAnalyticsScreen(),
     ),
   ],
 );

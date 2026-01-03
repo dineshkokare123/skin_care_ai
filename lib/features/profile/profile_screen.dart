@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skin_care_ai/core/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../auth/providers/auth_provider.dart';
 import '../../shared/widgets/glass_container.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -87,6 +88,30 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 32),
+
+            // Liquid Glass Premium Card
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: AppTheme.glassDecoration(color: AppTheme.accent.withOpacity(0.2), blur: 15),
+              child: Column(
+                children: [
+                   const Icon(Icons.diamond_outlined, size: 40, color: AppTheme.accent),
+                   const SizedBox(height: 12),
+                   Text("Unlock Premium", style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.textDark)),
+                   const SizedBox(height: 8),
+                   Text("Get unlimited AI analysis and detailed routine reports.", textAlign: TextAlign.center, style: TextStyle(color: AppTheme.textDark.withOpacity(0.7))),
+                   const SizedBox(height: 16),
+                   ElevatedButton(
+                     onPressed: () {},
+                     style: ElevatedButton.styleFrom(backgroundColor: AppTheme.accent, foregroundColor: Colors.white),
+                     child: const Text("Upgrade Now"),
+                   )
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 32),
             
             // Menu Items
             _buildMenuItem(context, Icons.history, "History", () => _showHistory(context)),
@@ -102,7 +127,7 @@ class ProfileScreen extends ConsumerWidget {
               context.push('/add-product');
             }),
             _buildMenuItem(context, Icons.insights, "Sales Analytics", () {
-              _showAnalyticsSheet(context);
+              context.push('/analytics');
             }),
             
             const Divider(height: 48),
